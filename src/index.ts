@@ -1,4 +1,4 @@
-import HelloWorld from './HelloWorld';
+import Game from "./Game";
 
-const helloWorld = new HelloWorld();
-console.log(helloWorld.print());
+const game = new Game();
+game.start();
