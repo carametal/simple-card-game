@@ -1,8 +1,6 @@
-import Config from "./Config";
 import UserPlayer from "./UserPlayer";
 
 class Game {
-  private settings: Config = new Config();
   private userPlayer: UserPlayer;
 
   public constructor(numOfCards: number) {
