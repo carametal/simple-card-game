@@ -1,8 +1,7 @@
 import Card from "./Card";
 import Hand from "./Hand";
-import Player from "./Player";
 
-export default class UserPlayer implements Player {
+export default class UserPlayer {
   private hand: Hand;
 
   public constructor(numOfCards: number) {
