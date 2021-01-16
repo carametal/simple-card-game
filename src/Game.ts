@@ -1,11 +1,16 @@
 import Config from "./Config";
+import UserPlayer from "./UserPlayer";
 
 class Game {
-  static START_MESSAGE: string = 'シンプルなカードゲームです。\n'
-    + '大きい数を出した方が多い方が勝ちです。';
   private settings: Config = new Config();
+  private userPlayer: UserPlayer;
+
+  public constructor(numOfCards: number) {
+    this.userPlayer = new UserPlayer(numOfCards);
+  }
+
   start(): void {
-    console.log(Game.START_MESSAGE);
+    console.log('未実装です。');
   }
 }
 

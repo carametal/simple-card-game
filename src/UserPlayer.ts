@@ -1,7 +1,10 @@
+import { DEFAULT_ECDH_CURVE } from "tls";
 import Card from "./Card";
 import Hand from "./Hand";
 
 export default class UserPlayer {
+
+  static DEFAULT_NUM_OF_CARDS = 5;
   private hand: Hand;
 
   public constructor(numOfCards: number) {
@@ -12,7 +15,7 @@ export default class UserPlayer {
     return this.hand;
   }
 
-  public playCard(cardNumber: number): Card {
+  public playCard(cardNumber: number = UserPlayer.DEFAULT_NUM_OF_CARDS): Card {
     return this.hand.playCard(cardNumber);
   }
 }
