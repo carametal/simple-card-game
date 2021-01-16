@@ -1,8 +1,9 @@
+import Card from "./Card";
 import CpuPlayer from "./CpuPlayer";
 import Round, { RoundResult } from "./Round";
 import UserPlayer from "./UserPlayer";
 
-const MESSAGE_INPUT_NUMBER_OF_PLAY_CARD: string = 'どのカードを出しますか？(出したいカードの数字を入力してください)';
+const MESSAGE_INPUT_NUMBER_OF_PLAY_CARD: string = 'どのカードを出しますか？(出したいカードの数字を入力してください):';
 const readlineSync = require('readline-sync');
 
 class Game {
@@ -18,15 +19,18 @@ class Game {
 
   public start(): void {
     this.rounds = this.rounds.map((r, i) => {
-      const numOfRound = i + 1;
+      return this.playRound(r, i);
+    });
+  }
+
+  public playRound(round: Round, numOfRound: number): Round {
       console.log(numOfRound + '回戦');
       console.log(this.userPlayer.showHand());
-      const input = readlineSync.question(MESSAGE_INPUT_NUMBER_OF_PLAY_CARD);
-      const playerCard = this.userPlayer.playCard(Number(input));
+      const playerCard = this.playCard();
       const cpuCard = this.cpuPlayer.playCard();
       console.log(`あなたのカード:${playerCard.number}`);
       console.log(`CPUのカード:${cpuCard.number}`);
-      const roundResult = r.judge(playerCard, cpuCard);
+      const roundResult = round.judge(playerCard, cpuCard);
       if(roundResult === RoundResult.Win){
         console.log('あなたの勝ちです!!');
       }
@@ -38,8 +42,18 @@ class Game {
       }else {
         throw new Error('未実装のRoundResultです。');
       }
-      return r;
-    });
+      return round;
+  }
+
+  private playCard(): Card {
+    while(true) {
+      try {
+        const input = readlineSync.question(MESSAGE_INPUT_NUMBER_OF_PLAY_CARD);
+        return this.userPlayer.playCard(Number(input));
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
   }
 
   public showResult(): void {

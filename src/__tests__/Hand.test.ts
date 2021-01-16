@@ -3,6 +3,7 @@ import Hand from "../Hand";
 
 const NUM_OF_CARDS = 7;
 const CARD_NUMBER_OF_PLAY = 4;
+const CARD_NUMBER_TO_BE_THROWN = NUM_OF_CARDS + 1;
 
 test('make hand', () => {
   const hand = new Hand(NUM_OF_CARDS);
@@ -18,3 +19,8 @@ test('play a card', () => {
   expect(expectingCard).toStrictEqual(card);
   expect(NUM_OF_CARDS - 1).toBe(hand.getCards().length);
 });
+
+test('throw play a card', () => {
+  const hand = new Hand(NUM_OF_CARDS);
+  expect(() => hand.playCard(CARD_NUMBER_TO_BE_THROWN)).toThrow();
+})

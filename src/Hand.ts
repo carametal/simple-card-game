@@ -14,6 +14,9 @@ export default class Hand {
 
   public playCard(cardNumber: number) : Card {
     const index = this.cards.findIndex(c => c.number === cardNumber);
+    if(index == -1){
+      throw new Error('手札にないカードです。もう一度入力してください');
+    }
     const playCards = this.cards.splice(index, Hand.NUM_OF_PLAY_CARD_AT_ONE_TIME);
     return playCards[0];
   }

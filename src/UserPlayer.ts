@@ -22,6 +22,6 @@ export default class UserPlayer {
   }
 
   public playCard(cardNumber: number = UserPlayer.DEFAULT_NUM_OF_CARDS): Card {
-    return this.hand.playCard(cardNumber);
+      return this.hand.playCard(cardNumber);
   }
 }
