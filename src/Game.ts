@@ -16,7 +16,7 @@ class Game {
     this.rounds = [...Array(numOfCards)].map(_ => new Round());
   }
 
-  start(): void {
+  public start(): void {
     this.rounds = this.rounds.map((r, i) => {
       const numOfRound = i + 1;
       console.log(numOfRound + '回戦');
@@ -42,23 +42,39 @@ class Game {
     });
   }
 
-  showResult(): void {
+  public showResult(): void {
     console.log('******************');
     console.log('試合終了。結果は...');
+    this.printGameResult();
+  }
+
+  private printGameResult(): void {
     const numOfRounds = this.rounds.length;
-    const countWin = this.rounds.filter(r => r.getResult() === RoundResult.Win).length;
-    const countLose = this.rounds.filter(r => r.getResult() === RoundResult.Lose).length;
-    const countDraw = this.rounds.filter(r => r.getResult() === RoundResult.Draw).length;
-    console.log(`${numOfRounds}戦 ${countWin}勝 ${countLose}敗 ${countDraw}分`);
-    if (countWin > countLose) {
+    const numOfWins = this.countWins();
+    const numOfLosses = this.countLosses();
+    const numOfDraws = this.countDraws();
+    console.log(`${numOfRounds}戦 ${numOfWins}勝 ${numOfLosses}敗 ${numOfDraws}分`);
+    if (numOfWins > numOfLosses) {
       console.log('あなたの勝ちです!!');
     }
-    else if (countLose > countWin) {
+    else if (numOfLosses > numOfWins) {
       console.log('あなたの負けです...');
     }
     else {
       console.log('引き分けです。');
     }
+  }
+
+  private countWins(): number {
+    return this.rounds.filter(r => r.getResult() === RoundResult.Win).length;
+  }
+
+  private countLosses(): number {
+    return this.rounds.filter(r => r.getResult() === RoundResult.Lose).length;
+  }
+
+  private countDraws(): number {
+    return this.rounds.filter(r => r.getResult() === RoundResult.Draw).length
   }
 }
 
