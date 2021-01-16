@@ -15,6 +15,12 @@ export default class UserPlayer {
     return this.hand;
   }
 
+  public showHand() :Array<number> {
+    const hand = this.hand;
+    const numbers = hand.getCards().map(c => c.number);
+    return numbers;
+  }
+
   public playCard(cardNumber: number = UserPlayer.DEFAULT_NUM_OF_CARDS): Card {
     return this.hand.playCard(cardNumber);
   }

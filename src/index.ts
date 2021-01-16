@@ -12,3 +12,4 @@ const input = readlineSync.question(MESSAGE_INPUT_NUMBER_OF_CARD);
 const game = new Game(+input);
 console.log(`1から${input}までの${input}枚のカードでゲームを開始します。`);
 game.start();
+game.showResult();
