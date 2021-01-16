@@ -32,7 +32,6 @@ class Game {
       }
       else if(roundResult === RoundResult.Lose) {
         console.log('あなたの負けです...');
-        r.setLose();
       }
       else if (roundResult === RoundResult.Draw) {
         console.log('引き分けです。');

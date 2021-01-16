@@ -1,23 +1,30 @@
+import Card from "../Card";
 import Round, { RoundResult } from "../Round";
 
 test('make round', () => {
   expect(() => new Round()).not.toThrow();
 });
 
-test('set win & get win', () => {
+test('judge win', () => {
   const round = new Round();
-  round.setWin();
+  const playerCard = new Card(6);
+  const cpuCard = new Card(5);
+  round.judge(playerCard, cpuCard);
   expect(round.getResult()).toBe(RoundResult.Win);
 });
 
-test('set lose & set lose', () => {
+test('judge lose', () => {
   const round = new Round();
-  round.setLose();
+  const playerCard = new Card(8);
+  const cpuCard = new Card(9);
+  round.judge(playerCard, cpuCard);
   expect(round.getResult()).toBe(RoundResult.Lose);
-})
+});
 
-test('set draw & set draw', () => {
+test('judge draw', () => {
   const round = new Round();
-  round.setDraw();
+  const playerCard = new Card(3);
+  const cpuCard = new Card(3);
+  round.judge(playerCard, cpuCard);
   expect(round.getResult()).toBe(RoundResult.Draw);
-})
+});

@@ -9,29 +9,32 @@ export const RoundResult = {
 export default class Round {
   private result!: string;
 
-  public setWin(): void {
+  judge(playerCard: Card, cpuCard: Card): string {
+    if(playerCard.number > cpuCard.number) {
+      this.setWin();
+      return RoundResult.Win
+    } else if (cpuCard.number > playerCard.number) {
+      this.setLose();
+      return RoundResult.Lose;
+    } else {
+      this.setDraw();
+      return RoundResult.Draw;
+    }
+  }
+
+  private setWin(): void {
     this.result = RoundResult.Win;
   }
 
-  public setLose(): void {
+  private setLose(): void {
     this.result = RoundResult.Lose;
   }
 
-  public setDraw(): void {
+  private setDraw(): void {
     this.result = RoundResult.Draw;
   }
 
   public getResult(): string {
     return this.result;
-  }
-
-  judge(playerCard: Card, cpuCard: Card): string {
-    if(playerCard.number > cpuCard.number) {
-      return RoundResult.Win
-    } else if (cpuCard.number > playerCard.number) {
-      return RoundResult.Lose;
-    } else {
-      return RoundResult.Draw;
-    }
   }
 }
