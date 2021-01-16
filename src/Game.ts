@@ -20,24 +20,24 @@ class Game {
     this.rounds = this.rounds.map((r, i) => {
       const numOfRound = i + 1;
       console.log(numOfRound + '回戦');
-      console.log();
       console.log(this.userPlayer.showHand());
       const input = readlineSync.question(MESSAGE_INPUT_NUMBER_OF_PLAY_CARD);
-      const yourCard = this.userPlayer.playCard(Number(input));
+      const playerCard = this.userPlayer.playCard(Number(input));
       const cpuCard = this.cpuPlayer.playCard();
-      console.log(`あなたのカード:${yourCard.number}`);
+      console.log(`あなたのカード:${playerCard.number}`);
       console.log(`CPUのカード:${cpuCard.number}`);
-      if(yourCard.number > cpuCard.number){
+      const roundResult = r.judge(playerCard, cpuCard);
+      if(roundResult === RoundResult.Win){
         console.log('あなたの勝ちです!!');
-        r.setWin();
       }
-      else if(cpuCard.number > yourCard.number) {
+      else if(roundResult === RoundResult.Lose) {
         console.log('あなたの負けです...');
         r.setLose();
       }
-      else {
+      else if (roundResult === RoundResult.Draw) {
         console.log('引き分けです。');
-        r.setDraw();
+      }else {
+        throw new Error('未実装のRoundResultです。');
       }
       return r;
     });
